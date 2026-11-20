@@ -1,0 +1,35 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/img/logo-vav.png";
+import Icon from "./Icon.astro";
+import FutureLink from "./FutureLink.astro";
+import { nav, phones, NOTE } from "../data/clinic";
+---
+<header class="header">
+  <div class="container header__row">
+    <a class="header__logo" href="#top" aria-label="VAV Dental, на початок сторінки">
+      <Image src={logo} alt="" width={112} height={44} densities={[1, 2]} loading="eager" />
+    </a>
+
+    <nav id="menu" class="nav" popover aria-label="Розділи сторінки">
+      <ul class="nav__list" role="list">
+        {nav.map((item) => (
+          <li><a class="nav__link" href={item.href} data-rec={item.rec}>{item.label}</a></li>
+        ))}
+      </ul>
+      <div class="nav__extra">
+        <a class="nav__phone-m" href={phones.main.href}><Icon name="phone" />{phones.main.text}</a>
+        <FutureLink note={NOTE} class="nav__lang">Polski / English</FutureLink>
+      </div>
+    </nav>
+
+    <div class="header__actions">
+      <a class="header__phone" href={phones.main.href}>{phones.main.text}</a>
+      <button class="btn btn--primary header__contact" type="button" popovertarget="channels" data-rec="R-004">Зв'язатися</button>
+      <a class="icon-btn header__call" href={phones.main.href} aria-label={`Подзвонити ${phones.main.full}`} data-rec="R-002"><Icon name="phone" /></a>
+      <button class="icon-btn header__burger" type="button" popovertarget="menu" aria-label="Меню" aria-controls="menu">
+        <Icon name="menu" class="icon--open" /><Icon name="close" class="icon--close" />
+      </button>
+    </div>
+  </div>
+</header>

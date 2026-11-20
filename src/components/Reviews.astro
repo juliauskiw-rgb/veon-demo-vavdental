@@ -1,0 +1,21 @@
+---
+// Verbatim reviews from the clinic's homepage (C-012). No rating and no count: none verified (C-013).
+import FutureLink from "./FutureLink.astro";
+import { reviews, NOTE } from "../data/clinic";
+---
+<section id="vidguky" class="reviews" data-rec="R-006" aria-labelledby="vidguky-title">
+  <div class="container">
+    <div class="reviews__head">
+      <h2 id="vidguky-title" class="section-title">Що пишуть пацієнти</h2>
+      <FutureLink note={NOTE}>Усі відгуки</FutureLink>
+    </div>
+    <div class="reviews__grid">
+      {reviews.map((r, i) => (
+        <figure class:list={["review", { "review--lead": i === 0 }]}>
+          <blockquote><p>{r.text}</p></blockquote>
+          <figcaption><strong>{r.author}</strong>, відгук у Google</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

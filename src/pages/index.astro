@@ -1,0 +1,66 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Directions from "../components/Directions.astro";
+import Promo from "../components/Promo.astro";
+import Prices from "../components/Prices.astro";
+import Doctors from "../components/Doctors.astro";
+import Tech from "../components/Tech.astro";
+import Reviews from "../components/Reviews.astro";
+import Contacts from "../components/Contacts.astro";
+import Footer from "../components/Footer.astro";
+import ChannelPanel from "../components/ChannelPanel.astro";
+import MobileBar from "../components/MobileBar.astro";
+import fontDisplay from "../assets/fonts/geologica-cyrillic-700-normal.woff2?url";
+import { phones, address, socials } from "../data/clinic";
+
+const title = "Стоматологія на Сихові, Львів — VAV Dental, Дністерська 16а";
+const description = "VAV Dental — стоматологія повного циклу на Сихові: вул. Дністерська, 16а, Львів. Пн–Пт 09:00–19:00, телефон 063 620 40 87.";
+
+// JSON-LD Dentist from veon/client.json (C-001, C-002, C-020, socials confirmed). No rating: none verified (C-013).
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Dentist",
+  name: "VAV Dental",
+  description: "Стоматологія повного циклу на Сихові",
+  telephone: [phones.main.full.replace(/ /g, ""), phones.second.full.replace(/ /g, "")],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: address.street,
+    addressLocality: address.city,
+    addressCountry: "UA",
+  },
+  areaServed: "Сихівський район, Львів",
+  hasMap: address.map,
+  openingHoursSpecification: [{
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "09:00",
+    closes: "19:00",
+  }],
+  sameAs: socials.map((s) => s.href),
+};
+---
+<Base lang="uk" title={title} description={description}>
+  <Fragment slot="head">
+    <link rel="preload" href={fontDisplay} as="font" type="font/woff2" crossorigin data-rec="R-017" />
+    <script type="application/ld+json" data-rec="R-025" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+  <Header slot="header" />
+
+  <Hero />
+  <Directions />
+  <Promo />
+  <Prices />
+  <Doctors />
+  <Tech />
+  <Reviews />
+  <Contacts />
+  <Footer slot="footer" />
+
+  <Fragment slot="after">
+    <ChannelPanel />
+    <MobileBar />
+  </Fragment>
+</Base>

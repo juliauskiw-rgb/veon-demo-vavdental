@@ -1,0 +1,33 @@
+---
+import { Picture } from "astro:assets";
+import Icon from "./Icon.astro";
+import FutureLink from "./FutureLink.astro";
+import { doctorsStrip, people, NOTE } from "../data/clinic";
+const team = [people.kretsul];
+---
+<section id="likari" class="doctors" data-rec="R-005" aria-labelledby="likari-title">
+  <div class="container" data-rail>
+    <div class="doctors__head">
+      <h2 id="likari-title" class="section-title">Лікарі VAV Dental</h2>
+      <div class="doctors__controls">
+        <button class="icon-btn rail-btn" type="button" data-rail-back aria-label="Попередні лікарі" aria-controls="doctors-rail"><Icon name="back" /></button>
+        <button class="icon-btn rail-btn" type="button" data-rail-next aria-label="Наступні лікарі" aria-controls="doctors-rail"><Icon name="next" /></button>
+      </div>
+    </div>
+    <ul id="doctors-rail" class="rail" role="list" tabindex="0" aria-label="Лікарі, гортається вбік">
+      {doctorsStrip.map((d, i) => (
+        <li class="doc" data-reveal style={`--reveal-delay:${Math.min(i, 3) * 40}ms`}>
+          <Picture src={d.photo} formats={["avif", "webp"]} fallbackFormat="webp" widths={[300, 600]} sizes="(min-width: 60rem) 300px, 72vw" alt={`${d.name}, ${d.role.toLowerCase()}`} class="doc__photo" loading="lazy" />
+          <h3 class="doc__name">{d.name}</h3>
+          <p class="doc__role">{d.role}</p>
+          {d.years && <p class="doc__years">Досвід роботи: {d.years}</p>}
+          <div class="doc__actions">
+            <button class="btn btn--ghost doc__btn" type="button" popovertarget="channels" data-rec="R-004">Записатися</button>
+            <FutureLink note={NOTE}>Сторінка лікаря</FutureLink>
+          </div>
+        </li>
+      ))}
+    </ul>
+    <p class="doctors__team">Також у команді: {team.map((t) => `${t.role.toLowerCase()} ${t.name}`).join(", ")} і адміністратор Стангурська Анастасія Володимирівна.</p>
+  </div>
+</section>

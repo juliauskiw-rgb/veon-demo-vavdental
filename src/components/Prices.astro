@@ -1,0 +1,24 @@
+---
+import FutureLink from "./FutureLink.astro";
+import { prices, NOTE } from "../data/clinic";
+---
+<section id="cziny" class="prices" data-rec="R-007" aria-labelledby="cziny-title">
+  <div class="container prices__grid">
+    <div class="prices__head">
+      <h2 id="cziny-title" class="section-title">Скільки коштує лікування</h2>
+      <p class="prices__note">Орієнтовні ціни з прайсу клініки.</p>
+      <div class="prices__actions">
+        <button class="btn btn--ghost" type="button" popovertarget="channels" data-rec="R-004">Уточнити вартість</button>
+        <FutureLink note={NOTE}>Повний прайс</FutureLink>
+      </div>
+    </div>
+    <dl class="prices__list">
+      {prices.map((p, i) => (
+        <div class:list={["price", { "price--lead": p.lead }]} data-reveal style={`--reveal-delay:${Math.min(i, 3) * 40}ms`}>
+          <dt>{p.name}</dt>
+          <dd><span class="price__value">{p.value}</span>&nbsp;<span class="price__unit">{p.unit}</span></dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>

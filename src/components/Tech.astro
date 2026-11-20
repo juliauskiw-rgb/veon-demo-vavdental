@@ -1,0 +1,31 @@
+---
+import { Picture } from "astro:assets";
+import scanner from "../assets/img/scanner-3shape.webp";
+import microscope from "../assets/img/microscope.webp";
+import FutureLink from "./FutureLink.astro";
+import { equipment, safety, NOTE } from "../data/clinic";
+---
+<section id="tehnologiyi" class="tech" aria-labelledby="tehnologiyi-title">
+  <div class="container tech__grid">
+    <figure class="tech__photo">
+      <Picture src={scanner} formats={["avif", "webp"]} fallbackFormat="webp" widths={[400, 640, 800]} sizes="(min-width: 60rem) 42vw, 100vw" alt="Лікар працює з інтраоральним сканером 3Shape" loading="lazy" />
+      <figcaption>Інтраоральний сканер 3Shape</figcaption>
+    </figure>
+    <div class="tech__text">
+      <h2 id="tehnologiyi-title" class="section-title">Обладнання і безпека</h2>
+      <dl class="tech__list">
+        {equipment.map((e) => (
+          <div><dt>{e.name}</dt><dd>{e.detail}</dd></div>
+        ))}
+      </dl>
+      <figure class="tech__micro">
+        <Picture src={microscope} formats={["avif", "webp"]} fallbackFormat="webp" widths={[344]} sizes="(min-width: 60rem) 1px, 344px" alt="Лікар VAV Dental працює з дентальним мікроскопом" loading="lazy" />
+        <figcaption>Дентальний мікроскоп, збільшення від 30×</figcaption>
+      </figure>
+      <ul class="tech__safety" role="list">
+        {safety.map((s) => <li>{s}</li>)}
+      </ul>
+      <FutureLink note={NOTE}>Усе обладнання</FutureLink>
+    </div>
+  </div>
+</section>

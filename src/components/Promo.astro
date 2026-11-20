@@ -1,0 +1,23 @@
+---
+import { Picture } from "astro:assets";
+import tomograph from "../assets/img/tomograph.webp";
+import Icon from "./Icon.astro";
+import { phones, whatsappWith } from "../data/clinic";
+const wa = whatsappWith("Добрий день! Хочу записатися на безкоштовну КТ і консультацію (імплантація або повне знімне протезування).");
+---
+<section id="akcziya" class="promo on-accent" aria-labelledby="akcziya-title">
+  <div class="container promo__grid">
+    <div class="promo__text">
+      <h2 id="akcziya-title" class="promo__title">КТ і консультація&nbsp;— безкоштовно</h2>
+      <p class="promo__terms">при імплантації або повному знімному протезуванні</p>
+      <div class="promo__actions" data-rec="R-004">
+        <a class="btn btn--paper promo__cta" href={wa} rel="noopener" target="_blank"><Icon name="whatsapp" />Записатися на<span class="promo__free"> безкоштовну</span> КТ</a>
+        <a class="btn btn--line" href={phones.main.href}><Icon name="phone" />Подзвонити</a>
+      </div>
+    </div>
+    <figure class="promo__photo">
+      <Picture src={tomograph} formats={["avif", "webp"]} fallbackFormat="webp" widths={[316]} sizes="(min-width: 60rem) 316px, 100vw" alt="Пацієнтка в комп'ютерному томографі клініки" loading="lazy" />
+      <figcaption>Комп'ютерний томограф у клініці</figcaption>
+    </figure>
+  </div>
+</section>

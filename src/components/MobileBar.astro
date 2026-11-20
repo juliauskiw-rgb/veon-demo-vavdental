@@ -1,0 +1,8 @@
+---
+import Icon from "./Icon.astro";
+import { phones } from "../data/clinic";
+---
+<div class="mbar" data-rec="R-002, R-004">
+  <a class="btn btn--primary mbar__btn" href={phones.main.href}><Icon name="phone" />Подзвонити</a>
+  <button class="btn btn--ghost mbar__btn" type="button" popovertarget="channels">Написати</button>
+</div>

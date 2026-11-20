@@ -1,0 +1,52 @@
+---
+// Signature: the index «напрям — лікар» on the VAV field. Native <details name> accordion: one row open, works without JS.
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import FutureLink from "./FutureLink.astro";
+import { directions, NOTE } from "../data/clinic";
+---
+<section id="poslugy" class="dirs on-field" data-rec="R-011" aria-labelledby="poslugy-title">
+  <div class="container">
+    <div class="dirs__head">
+      <h2 id="poslugy-title" class="section-title">Десять напрямів і хто їх лікує</h2>
+      <p class="dirs__lead">Відкрийте напрям: побачите послуги і лікаря, до якого можна записатися.</p>
+    </div>
+
+    <ul class="dirs__list" role="list">
+      {directions.map((d, i) => (
+        <li>
+          <details class="dir" name="poslugy" open={i === 0}>
+            <summary class="dir__row">
+              <h3 class="dir__name">{d.name}</h3>
+              {d.people.length > 0 && (
+                <span class="dir__who" aria-hidden="true">
+                  <span class="dir__faces">
+                    {d.people.map(({ person }) => (
+                      <Image src={person.photo} alt="" width={48} height={48} densities={[1, 2]} class="dir__face" loading="lazy" />
+                    ))}
+                  </span>
+                  <span class="dir__names">{d.people.map(({ person }) => person.short).join(", ")}</span>
+                </span>
+              )}
+              <Icon name="chevron" class="dir__chev" />
+            </summary>
+            <div class="dir__panel">
+              <ul class="dir__services" role="list" aria-label={`Послуги: ${d.name}`}>
+                {d.services.map((s) => <li><FutureLink note={NOTE}>{s}</FutureLink></li>)}
+              </ul>
+              <div class="dir__side">
+                {d.people.map(({ person, for: f }) => (
+                  <div class="dir__person">
+                    <Image src={person.photo} alt="" width={56} height={56} densities={[1, 2]} class="dir__face dir__face--l" loading="lazy" />
+                    <p><strong>{person.name}</strong><span>{person.role}{person.years ? `, досвід ${person.years}` : ""}{f ? ` (${f})` : ""}</span></p>
+                  </div>
+                ))}
+                <button class="btn btn--paper" type="button" popovertarget="channels" data-rec="R-004">{d.people.length ? "Записатися до лікаря" : "Записатися на прийом"}</button>
+              </div>
+            </div>
+          </details>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

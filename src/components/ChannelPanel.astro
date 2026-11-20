@@ -1,0 +1,19 @@
+---
+// «Зв'язатися / Написати»: native popover (works without JS: Esc, click outside, close button).
+import Icon from "./Icon.astro";
+import { phones, messengers, address } from "../data/clinic";
+---
+<div id="channels" class="channels" popover aria-labelledby="channels-title" data-rec="R-004">
+  <div class="channels__head">
+    <p id="channels-title" class="channels__title">Зв'язатися з клінікою</p>
+    <button class="icon-btn channels__close" type="button" popovertarget="channels" popovertargetaction="hide" aria-label="Закрити"><Icon name="close" /></button>
+  </div>
+  <ul class="channels__list" role="list">
+    <li><a class="channel channel--call" href={phones.main.href}><Icon name="phone" /><span>{phones.main.text}</span></a></li>
+    <li><a class="channel" href={phones.second.href}><Icon name="phone" /><span>{phones.second.text}</span></a></li>
+    {messengers.map((m) => (
+      <li><a class="channel" href={m.href} rel="noopener" target={m.id === "viber" ? undefined : "_blank"}><Icon name={m.id} /><span>{m.label}</span></a></li>
+    ))}
+  </ul>
+  <p class="channels__hours">Працюємо {address.hours}</p>
+</div>

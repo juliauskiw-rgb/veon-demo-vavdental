@@ -1,0 +1,30 @@
+---
+import Icon from "./Icon.astro";
+import { phones, messengers, address, socials } from "../data/clinic";
+---
+<section id="kontakty" class="contacts on-field" data-rec="R-004, S-R008" aria-labelledby="kontakty-title">
+  <div class="container contacts__grid">
+    <div class="contacts__where">
+      <h2 id="kontakty-title" class="contacts__title">{address.short}</h2>
+      <p class="contacts__city">{address.city}, {address.district}</p>
+      <p class="contacts__hours">{address.hours}</p>
+      <a class="btn btn--line" href={address.map} rel="noopener" target="_blank"><Icon name="route" />Маршрут<span class="visually-hidden"> (Google Карти, нове вікно)</span></a>
+    </div>
+    <div class="contacts__reach">
+      <ul class="contacts__phones" role="list">
+        <li><a href={phones.main.href}><span class="visually-hidden">Подзвонити </span>{phones.main.text}</a></li>
+        <li><a href={phones.second.href}><span class="visually-hidden">Подзвонити </span>{phones.second.text}</a></li>
+      </ul>
+      <ul class="contacts__msgs" role="list" aria-label="Месенджери">
+        {messengers.map((m) => (
+          <li><a class="btn btn--line" href={m.href} rel="noopener" target={m.id === "viber" ? undefined : "_blank"}><Icon name={m.id} />{m.label}</a></li>
+        ))}
+      </ul>
+      <ul class="contacts__social" role="list" aria-label="Соцмережі">
+        {socials.map((s) => (
+          <li><a href={s.href} rel="noopener" target="_blank"><Icon name={s.id} />{s.label}</a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

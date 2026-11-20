@@ -1,0 +1,28 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/img/logo-vav.png";
+import FutureLink from "./FutureLink.astro";
+import { nav, legal, NOTE } from "../data/clinic";
+---
+<footer class="footer on-field">
+  <div class="container footer__grid">
+    <a class="footer__logo" href="#top" aria-label="VAV Dental, на початок сторінки">
+      <Image src={logo} alt="" width={102} height={40} densities={[1, 2]} loading="lazy" />
+    </a>
+    <div class="footer__legal">
+      <p>{legal.operator}</p>
+      <p>{legal.license}</p>
+    </div>
+    <nav class="footer__nav" aria-label="Розділи сторінки (підвал)">
+      <ul role="list">
+        {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+      </ul>
+    </nav>
+    <ul class="footer__future" role="list">
+      <li><FutureLink note={NOTE}>Про нас</FutureLink></li>
+      <li><FutureLink note={NOTE}>Політика конфіденційності</FutureLink></li>
+      <li><FutureLink note={NOTE}>Polski / English</FutureLink></li>
+    </ul>
+    <p class="footer__copy">© 2026 VAV Dental</p>
+  </div>
+</footer>
